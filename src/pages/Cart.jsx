@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useCart } from '../context/CartContext'
 import { useClient } from '../context/ClientContext'
 import './Cart.css'
 
 function Cart() {
   const { cartItems, removeFromCart, updateQuantity, clearCart, cartTotal } = useCart()
-  const { client } = useClient()
+  const { client, clientId } = useClient()
   const [showOrderType, setShowOrderType] = useState(false)
   const [showNameInput, setShowNameInput] = useState(false)
   const [showPaymentMode, setShowPaymentMode] = useState(false)
@@ -17,9 +17,18 @@ function Cart() {
   const [selectedPaymentMode, setSelectedPaymentMode] = useState('')
   const [selectedCashlessOption, setSelectedCashlessOption] = useState('')
 
-  // Get client-specific data
-  const clientName = client?.name || 'Business'
-  const messengerLink = client?.messengerLink || 'https://www.messenger.com/t/61560806385216'
+  // Get client-specific base path for navigation
+  const basePath = clientId ? `/${clientId}` : ''
+
+  // Get client-specific messenger link - with fallback
+  const getMessengerLink = () => {
+    // Try to get from client object first
+    if (client?.messengerLink) {
+      return client.messengerLink
+    }
+    // Fallback to simplify's messenger if no client messenger link
+    return 'https://www.messenger.com/t/jasonanthonytrillo'
+  }
 
   const generateOrderId = () => {
     const timestamp = Date.now().toString().slice(-6)
@@ -29,6 +38,8 @@ function Cart() {
 
   const generateOrderText = (orderType, paymentMode, cashlessOption) => {
     const orderId = generateOrderId()
+    const clientName = client?.name || 'Business'
+    
     let orderText = `Order ID: ${orderId}\n`
     orderText += `Name: ${customerName}\n`
     orderText += `Type: ${orderType}\n`
@@ -40,9 +51,10 @@ function Cart() {
     orderText += "Orders:\n"
     
     cartItems.forEach((item, index) => {
-      orderText += `${index + 1}. ${item.name} x${item.quantity}\n`
+      orderText += `${index + 1}. ${item.name} x${item.quantity} - ₱${item.price * item.quantity}\n`
     })
     
+    orderText += `\nTotal: ₱${cartTotal}\n`
     orderText += `\nThank you for ordering at ${clientName}!`
     return orderText
   }
@@ -86,8 +98,22 @@ function Cart() {
     const orderText = generateOrderText(selectedOrderType, paymentDisplay, '')
     const encodedMessage = encodeURIComponent(orderText)
     
-    // Open Facebook Messenger with pre-filled message (dynamic link)
-    window.open(`${messengerLink}?text=${encodedMessage}`, '_blank')
+    // Get the correct messenger link
+    const messengerLink = getMessengerLink()
+    
+    // Open Facebook Messenger with pre-filled message
+    const messengerUrl = `${messengerLink}?text=${encodedMessage}`
+    
+    // Try to open messenger - use different approach for mobile
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+    
+    if (isMobile) {
+      // On mobile, try usingMessenger app directly
+      window.location.href = messengerUrl
+    } else {
+      // On desktop, use _blank
+      window.open(messengerUrl, '_blank')
+    }
   
     // Clear cart after checkout
     clearCart()
@@ -117,7 +143,7 @@ function Cart() {
           </svg>
           <h2>Your cart is empty</h2>
           <p>Looks like you haven't added any items yet.</p>
-          <Link to="/menu" className="continue-shopping-btn">
+          <Link to={`${basePath}/menu`} className="continue-shopping-btn">
             Browse Menu
           </Link>
         </div>

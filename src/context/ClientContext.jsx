@@ -1,5 +1,5 @@
-import { createContext, useContext, useState, useEffect } from 'react'
-import { useParams, useLocation } from 'react-router-dom'
+import { createContext, useContext, useMemo, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { getClientById, getClientIds, defaultClientId } from '../data/clients'
 
 const ClientContext = createContext(null)
@@ -13,51 +13,43 @@ export const useClient = () => {
 }
 
 export const ClientProvider = ({ children }) => {
-  const [client, setClient] = useState(null)
-  const [isLoading, setIsLoading] = useState(true)
-  const [clientId, setClientId] = useState(null)
-  
   const location = useLocation()
-  const params = useParams()
-
-  useEffect(() => {
-    // Get all client IDs
-    const clientIds = getClientIds()
-    
-    // Get current path
+  
+  // Get all valid client IDs
+  const clientIds = useMemo(() => getClientIds(), [])
+  
+  // Extract client ID from URL path synchronously
+  // Expected format: /projectbrew, /projectbrew/menu, /milkteashop, etc.
+  const urlClientId = useMemo(() => {
     const path = location.pathname
-    
-    // Extract client ID from URL path
-    // Expected format: /projectbrew, /projectbrew/menu, /milkteashop, etc.
     const pathParts = path.split('/').filter(Boolean)
-    const urlClientId = pathParts[0]
+    const firstSegment = pathParts[0]
     
     // Check if the first path segment is a valid client ID
-    if (clientIds.includes(urlClientId)) {
-      setClientId(urlClientId)
-    } else {
-      // Default to the first client if no valid client ID in URL
-      setClientId(defaultClientId)
+    if (clientIds.includes(firstSegment)) {
+      return firstSegment
     }
-  }, [location.pathname])
+    
+    // Default to the default client if no valid client ID in URL
+    return defaultClientId
+  }, [location.pathname, clientIds])
 
+  // Get client data based on URL client ID
+  const client = useMemo(() => {
+    return getClientById(urlClientId)
+  }, [urlClientId])
+
+  // Update document title with client name (useEffect for side effects)
   useEffect(() => {
-    if (clientId) {
-      const clientData = getClientById(clientId)
-      setClient(clientData)
-      setIsLoading(false)
-      
-      // Update document title with client name
-      if (clientData) {
-        document.title = clientData.name
-      }
+    if (client) {
+      document.title = client.name
     }
-  }, [clientId])
+  }, [client])
 
   const value = {
     client,
-    clientId,
-    isLoading,
+    clientId: urlClientId,
+    isLoading: false,
     getClientById,
     getClientIds
   }
