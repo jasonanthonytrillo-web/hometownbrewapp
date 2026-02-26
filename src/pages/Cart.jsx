@@ -12,7 +12,6 @@ function Cart() {
   const [showPaymentMode, setShowPaymentMode] = useState(false)
   const [showCashlessOptions, setShowCashlessOptions] = useState(false)
   const [showConfirm, setShowConfirm] = useState(false)
-  const [showCopied, setShowCopied] = useState(false)
   const [selectedOrderType, setSelectedOrderType] = useState('')
   const [customerName, setCustomerName] = useState('')
   const [selectedPaymentMode, setSelectedPaymentMode] = useState('')
@@ -29,6 +28,21 @@ function Cart() {
     }
     // Fallback to simplify's messenger if no client messenger link
     return 'https://www.messenger.com/t/jasonanthonytrillo'
+  }
+
+  // Extract page ID from messenger link
+  const getMessengerPageId = (messengerLink) => {
+    // Extract the page ID from links like https://www.messenger.com/t/336367819563080
+    const match = messengerLink.match(/\/t\/(\d+)/)
+    if (match) {
+      return match[1]
+    }
+    // Try alternative format
+    const altMatch = messengerLink.match(/messenger\.com\/t\/([^\/]+)/)
+    if (altMatch) {
+      return altMatch[1]
+    }
+    return null
   }
 
   const generateOrderId = () => {
@@ -97,33 +111,41 @@ function Cart() {
       : `${selectedPaymentMode} (${selectedCashlessOption})`
     
     const orderText = generateOrderText(selectedOrderType, paymentDisplay, '')
-    
-    // Get the correct messenger link
     const messengerLink = getMessengerLink()
     
     // Detect mobile device
     const isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent)
     
+    // Try to copy to clipboard first
     try {
-      // Try to copy text to clipboard first (works on most mobile browsers)
       if (navigator.clipboard && navigator.clipboard.writeText) {
         await navigator.clipboard.writeText(orderText)
-        setShowCopied(true)
-        setTimeout(() => setShowCopied(false), 3000)
       }
     } catch (err) {
-      console.log('Clipboard not available, trying alternative method')
+      console.log('Clipboard not available')
     }
     
-    // Build the messenger URL with text parameter
+    // Try different Messenger URL formats
     const encodedMessage = encodeURIComponent(orderText)
-    const messengerUrl = `${messengerLink}?text=${encodedMessage}`
     
+    // Method 1: Try using m.me format (works better on mobile)
+    const pageId = getMessengerPageId(messengerLink)
+    
+    let messengerUrl = ''
+    if (pageId) {
+      // Use m.me short link format with message
+      messengerUrl = `https://m.me/${pageId}?text=${encodedMessage}`
+    } else {
+      // Fallback to original link
+      messengerUrl = `${messengerLink}?text=${encodedMessage}`
+    }
+    
+    // For mobile, try direct navigation
     if (isMobile) {
-      // On mobile, try using location.href which works better for deep links
+      // Use location.href for better mobile support
       window.location.href = messengerUrl
     } else {
-      // On desktop, use _blank
+      // Desktop - open in new tab
       window.open(messengerUrl, '_blank')
     }
   
@@ -165,13 +187,6 @@ function Cart() {
 
   return (
     <div className="cart fade-in-fast">
-      {/* Copied to clipboard notification */}
-      {showCopied && (
-        <div className="copied-notification">
-          Order copied to clipboard! Paste it in Messenger.
-        </div>
-      )}
-
       {/* Order Type Selection Modal */}
       {showOrderType && (
         <div className="order-type-modal">
@@ -322,7 +337,7 @@ function Cart() {
               <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
             </svg>
             <h2>Proceed to Messenger?</h2>
-            <p>Your order will be sent to our Facebook Messenger. You'll be able to review and send your order.</p>
+            <p>Your order will open in Messenger. Just click Send to complete your order!</p>
             <div className="confirm-buttons">
               <button 
                 className="confirm-btn"
