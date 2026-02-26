@@ -1,6 +1,43 @@
+import { useClient } from '../context/ClientContext'
 import './About.css'
 
+// Client-specific about content
+const clientAboutContent = {
+  hometownbrew: {
+    image: 'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=600&h=500&fit=crop',
+    story: [
+      "Welcome to Hometown Brew, where passion meets perfection in every cup. Founded with a vision to bring the finest coffee and dairy products to our community, we've been serving quality since day one.",
+      "Our journey began with a simple belief: everyone deserves access to exceptional coffee and fresh dairy products. We source our beans from sustainable farms around the world and partner with local dairy producers who share our commitment to quality.",
+      "At Hometown Brew, we don't just serve coffee and dairy – we craft experiences. Every cup is made with care, every pastry is baked with love, and every customer is family."
+    ]
+  },
+  milkteashop: {
+    image: 'https://images.unsplash.com/photo-1558857563-b371033873b8?w=600&h=500&fit=crop',
+    story: [
+      "Welcome to Milk Tea Shop, where bubble tea dreams come true! We specialize in creating the most delicious and refreshing milk tea drinks that transport you to tea heaven.",
+      "Our journey started with a love for authentic Asian bubble tea. We source the finest tea leaves from Taiwan and use only the freshest ingredients to create drinks that delight our customers.",
+      "At Milk Tea Shop, we believe in creativity and quality. From classic milk tea to innovative fruit blends, every drink is crafted with care and topped with delicious boba."
+    ]
+  },
+  projectbrew: {
+    image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&h=500&fit=crop',
+    story: [
+      "Welcome to Project Brew, where innovation meets tradition. We are dedicated to pushing the boundaries of what coffee can be while honoring the craft of brewing.",
+      "Our team of expert baristas experiments with unique brewing methods, rare coffee beans, and creative recipes to bring you an extraordinary coffee experience.",
+      "At Project Brew, every cup tells a story. We invite you to explore our curated selection of specialty coffees and join us on this brewing adventure."
+    ]
+  }
+}
+
 function About() {
+  const { clientId, client } = useClient()
+  
+  // Get client-specific content
+  const aboutContent = clientAboutContent[clientId] || {
+    image: clientAboutContent.hometownbrew.image,
+    story: clientAboutContent.hometownbrew.story
+  }
+
   return (
     <div className="about">
       {/* Hero Section */}
@@ -17,29 +54,16 @@ function About() {
           <div className="about-grid">
             <div className="about-image img-zoom fade-in">
               <img 
-                src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=600&h=500&fit=crop" 
-                alt="Our Coffee Shop" 
+                src={aboutContent.image} 
+                alt={client?.name || 'Our Shop'} 
               />
             </div>
             
             <div className="about-text fade-in-delay-1">
               <h2>Our Story</h2>
-              <p>
-                Welcome to Hometown Brew, where passion meets perfection in every cup. 
-                Founded with a vision to bring the finest coffee and dairy products to 
-                our community, we've been serving quality since day one.
-              </p>
-              <p>
-                Our journey began with a simple belief: everyone deserves access to 
-                exceptional coffee and fresh dairy products. We source our beans from 
-                sustainable farms around the world and partner with local dairy producers 
-                who share our commitment to quality.
-              </p>
-              <p>
-                At Hometown Brew, we don't just serve coffee and dairy – we craft 
-                experiences. Every cup is made with care, every pastry is baked with 
-                love, and every customer is family.
-              </p>
+              {aboutContent.story.map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
               
               <div className="about-features">
                 <div className="about-feature">

@@ -5,21 +5,19 @@ A React + Vite static website that supports multiple clients from a single deplo
 - Logo / banner
 - Color theme
 - Products / prices
-- Messenger Contact information
+- Messenger checkout link
+- Contact information
 
-## checkout link
-- URL Structure
-
-This project uses HashRouter for compatibility with static hosting:
+## URL Structure
 
 ```
-https://yoursite.com/                    → Default client
-https://yoursite.com/#/hometownbrew      → Hometown Brew
-https://yoursite.com/#/hometownbrew/menu → Hometown Brew Menu
-https://yoursite.com/#/milkteashop       → Milk Tea Shop
-https://yoursite.com/#/milkteashop/menu  → Milk Tea Shop Menu
-https://yoursite.com/#/projectbrew        → Project Brew
-https://yoursite.com/#/projectbrew/menu   → Project Brew Menu
+https://yoursite.com/                    → Default client (hometownbrew)
+https://yoursite.com/hometownbrew       → Hometown Brew
+https://yoursite.com/hometownbrew/menu  → Hometown Brew Menu
+https://yoursite.com/milkteashop        → Milk Tea Shop
+https://yoursite.com/milkteashop/menu   → Milk Tea Shop Menu
+https://yoursite.com/projectbrew        → Project Brew
+https://yoursite.com/projectbrew/menu   → Project Brew Menu
 ```
 
 ## Folder Structure
@@ -36,11 +34,11 @@ src/
 │   ├── Footer.jsx
 │   └── ...
 ├── pages/
-│   ├── Home.jsx
+│   ├── Home.jsx                ← Dynamic hero images & content
 │   ├── Menu.jsx                ← Dynamic products from client config
-│   ├── Contact.jsx              ← Dynamic contact info
-│   ├── Cart.jsx                ← Dynamic messenger link
-│   └── ClientPage.jsx          ← Client wrapper component
+│   ├── About.jsx               ← Dynamic story & images
+│   ├── Contact.jsx             ← Dynamic contact info
+│   └── Cart.jsx                ← Dynamic messenger link
 ├── App.jsx                     ← Client-aware routing
 └── main.jsx
 ```
@@ -92,16 +90,17 @@ newclientname: {
 }
 ```
 
-2. **Add logo image**:
-   - Place logo image in `public/` folder
-   - Reference as `/filename.png` or `/filename.jpg`
+2. **Update Home.jsx hero section** (if you want custom hero images):
+   - Add client-specific content to `clientHeroContent` object in Home.jsx
 
-3. **Deploy** - Just push to GitHub and Render will automatically deploy!
+3. **Update About.jsx** (if you want custom story):
+   - Add client-specific content to `clientAboutContent` object in About.jsx
+
+4. **Deploy** - Just push to GitHub and Render will automatically deploy!
 
 ## Example Client Data Structure (clients.js)
 
-```
-javascript
+```javascript
 export const clients = {
   hometownbrew: {
     id: 'hometownbrew',
@@ -179,9 +178,9 @@ bash
    - Get your URL (e.g., `your-site.onrender.com`)
 
 5. **Access Your Sites**:
-   - `your-site.onrender.com/#/hometownbrew` → Hometown Brew
-   - `your-site.onrender.com/#/milkteashop` → Milk Tea Shop
-   - `your-site.onrender.com/#/projectbrew` → Project Brew
+   - `your-site.onrender.com/hometownbrew` → Hometown Brew
+   - `your-site.onrender.com/milkteashop` → Milk Tea Shop
+   - `your-site.onrender.com/projectbrew` → Project Brew
 
 ### Adding Custom Domains (Optional)
 - Go to your site settings → "Custom Domains"
@@ -191,21 +190,25 @@ bash
 ## How It Works
 
 Once deployed:
-- HashRouter handles all client routes
-- Client ID is extracted from URL hash (e.g., `#/projectbrew`)
-- Components automatically load client-specific data from `clients.js`
+- Client ID is extracted from URL path (e.g., `/projectbrew`)
+- Components automatically load client-specific data from:
+  - `clients.js` for products, contact info, theme
+  - `Home.jsx` for hero images
+  - `About.jsx` for story content
 
 To add a new client:
 1. Edit `src/data/clients.js` locally
-2. Push to GitHub
-3. Render automatically redeploys!
-4. New client is live at `your-site.com/#/newclientname`
+2. Optionally update Home.jsx and About.jsx with custom content
+3. Push to GitHub
+4. Render automatically redeploys!
+5. New client is live at `your-site.com/newclientname`
 
 ## Dynamic Theming
 
 Client themes are applied as CSS variables automatically:
 
-```css
+```
+css
 /* Components can use these CSS variables */
 .component {
   background-color: var(--client-background);
@@ -224,13 +227,14 @@ If you have an existing single-client website:
 1. Move your hardcoded data to `src/data/clients.js`
 2. Use the default client key (e.g., `hometownbrew`)
 3. Components will automatically use client data from context
-4. Test at `/#/yourclientid` route
+4. Test at `/yourclientid` route
 
 ## Troubleshooting
 
 **Page not found or blank**:
-- Make sure you're using the hash URL format: `/#/clientname`
+- Make sure `_redirects` file exists in `public/` folder
 - Verify all client IDs are added to the clients.js export
+- Trigger a manual redeploy on Render
 
 **Products not showing**:
 - Verify products array is in client configuration

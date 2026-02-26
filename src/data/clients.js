@@ -20,11 +20,11 @@ export const clients = {
     logo: '/hblogo.jpg',
     banner: '/banner.jpg',
     theme: {
-      primary: '#4A2C2A',
-      secondary: '#8B4513',
-      accent: '#D4A574',
-      background: '#FFF8F0',
-      text: '#2D1810'
+      primary: '#05300d',
+      secondary: '#4aab20ac',
+      accent: '#000000',
+      background: '#ffffff',
+      text: '#152e0b'
     },
     categories: [
       { id: 'all', label: 'All' },
@@ -140,7 +140,7 @@ export const clients = {
         { day: 'Wednesday', hours: '10 AM–12 AM', isClosed: false }
       ]
     },
-    messengerLink: 'https://www.messenger.com/t/61560806385216'
+    messengerLink: 'https://www.messenger.com/t/336367819563080'
   },
 
   // Example: Second client - Milk Tea Shop
@@ -237,14 +237,14 @@ export const clients = {
   projectbrew: {
     id: 'projectbrew',
     name: 'Project Brew',
-    logo: '/projectbrew-logo.png',
+    logo: '/pblogo.jpg',
     banner: '/projectbrew-banner.jpg',
     theme: {
-      primary: '#1565C0',
-      secondary: '#42A5F5',
-      accent: '#90CAF9',
-      background: '#E3F2FD',
-      text: '#0D47A1'
+      primary: '#533601',
+      secondary: '#cf971d',
+      accent: '#f6cd47',
+      background: '#ffffff',
+      text: '#c17906'
     },
     categories: [
       { id: 'all', label: 'All' },
@@ -303,7 +303,63 @@ export const clients = {
         { day: 'Sunday', hours: '8 AM–8 PM', isClosed: false }
       ]
     },
-    messengerLink: 'https://www.messenger.com/t/987654321'
+    messengerLink: 'https://www.messenger.com/t/117782470094668'
+  },
+
+  // Simplify - POS Service Landing Page
+  simplify: {
+    id: 'simplify',
+    name: 'Simplify',
+    tagline: 'Your store. Your website. Your Messenger.',
+    logo: '/simplifylogo.png',
+    banner: '/simplify-banner.jpg',
+    theme: {
+      primary: '#0028f1ca',
+      secondary: '#1ea8d6',
+      accent: '#ff24a0',
+      background: '#FAFAFA',
+      text: '#000000'
+    },
+    categories: [],
+    products: [],
+    contact: {
+      phone: '09919357954 / 09487901802',
+      email: 'jasonanthonytrillo@gmail.com',
+      address: '',
+      facebook: 'https://www.facebook.com/jasonanthonytrillo',
+      messengerLink: 'https://www.messenger.com/t/jasonanthonytrillo'
+    },
+    messengerLink: 'https://www.messenger.com/t/jasonanthonytrillo',
+    owner: {
+      name: 'Jason Anthony Trillo',
+      photo: '/jasonanthony.jpg',
+      description: 'A passionate entrepreneur dedicated to helping small businesses thrive in the digital age. With Simplify, I aim to make point-of-sale systems accessible and easy to use for every store owner.'
+    },
+    features: [
+      {
+        title: 'Web-based POS',
+        description: 'Access your store management from any device with an internet connection. No installations needed.',
+        icon: '🌐'
+      },
+      {
+        title: 'Messenger Ordering',
+        description: 'Customers can easily order through Facebook Messenger. Streamline your sales process effortlessly.',
+        icon: '💬'
+      },
+      {
+        title: 'Easy Management',
+        description: 'Manage products, track sales, and monitor your business with our intuitive dashboard.',
+        icon: '📊'
+      }
+    ],
+    benefits: [
+      'No need for expensive hardware',
+      'Real-time sales tracking',
+      'Customer order management',
+      'Easy product updates',
+      '24/7 access from anywhere',
+      'Simple setup process'
+    ]
   }
 }
 
@@ -327,4 +383,4 @@ export const getClientIds = () => {
 /**
  * Default client (used when no client is specified in URL)
  */
-export const defaultClientId = 'hometownbrew'
+export const defaultClientId = 'simplify'

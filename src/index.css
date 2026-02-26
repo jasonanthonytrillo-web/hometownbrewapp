@@ -1,11 +1,28 @@
 /* Global CSS Variables and Reset */
 :root {
+  /* Default theme (Hometown Brew - Coffee Shop) */
   --primary-dark-green: #1B4332;
   --light-green: #2D6A4F;
   --white: #FFFFFF;
   --darkest-green: #081C15;
   --font-primary: 'Poppins', sans-serif;
   --transition: 0.3s ease;
+  
+  /* Client-specific theme variables (set dynamically by App.jsx) */
+  --client-primary: #1B4332;
+  --client-secondary: #2D6A4F;
+  --client-accent: #40916C;
+  --client-background: #FFFFFF;
+  --client-text: #1B4332;
+}
+
+/* When client theme is loaded, override defaults */
+:root:has(:where(--client-primary)) {
+  --primary-dark-green: var(--client-primary, #1B4332);
+  --light-green: var(--client-secondary, #2D6A4F);
+  --accent: var(--client-accent, #40916C);
+  --background: var(--client-background, #FFFFFF);
+  --text-primary: var(--client-text, #1B4332);
 }
 
 * {
@@ -20,8 +37,8 @@ html {
 
 body {
   font-family: var(--font-primary);
-  background-color: var(--white);
-  color: var(--primary-dark-green);
+  background-color: var(--client-background, var(--white));
+  color: var(--client-text, var(--primary-dark-green));
   line-height: 1.6;
   overflow-x: hidden;
 }
@@ -97,16 +114,16 @@ input, textarea {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--light-green);
+  background: var(--client-secondary, var(--light-green));
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--primary-dark-green);
+  background: var(--client-primary, var(--primary-dark-green));
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--darkest-green);
+  background: var(--client-text, var(--darkest-green));
 }
 
 /* Mobile Responsive Adjustments */
@@ -136,14 +153,14 @@ input, textarea {
 }
 
 .btn-primary {
-  background-color: var(--light-green);
+  background-color: var(--client-secondary, var(--light-green));
   color: var(--white);
-  border-color: var(--light-green);
+  border-color: var(--client-secondary, var(--light-green));
 }
 
 .btn-primary:hover {
-  background-color: var(--primary-dark-green);
-  border-color: var(--primary-dark-green);
+  background-color: var(--client-primary, var(--primary-dark-green));
+  border-color: var(--client-primary, var(--primary-dark-green));
   transform: translateY(-2px);
   box-shadow: 0 5px 20px rgba(45, 106, 79, 0.4);
 }

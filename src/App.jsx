@@ -21,11 +21,18 @@ function AppContent() {
   useEffect(() => {
     if (client?.theme) {
       const root = document.documentElement
+      
+      // Set client-specific variables
       root.style.setProperty('--client-primary', client.theme.primary)
       root.style.setProperty('--client-secondary', client.theme.secondary)
       root.style.setProperty('--client-accent', client.theme.accent)
       root.style.setProperty('--client-background', client.theme.background)
       root.style.setProperty('--client-text', client.theme.text)
+      
+      // Also set the main theme variables used throughout the app
+      root.style.setProperty('--primary-dark-green', client.theme.primary)
+      root.style.setProperty('--light-green', client.theme.secondary)
+      root.style.setProperty('--darkest-green', client.theme.text)
     }
   }, [client])
 

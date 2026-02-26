@@ -1,16 +1,28 @@
 import { Link } from 'react-router-dom'
+import { useClient } from '../context/ClientContext'
 import './Footer.css'
 
 function Footer() {
+  const { clientId, client } = useClient()
+  
+  // Get client-specific data with fallbacks
+  const businessName = client?.name || 'Business'
+  const tagline = clientId === 'milkteashop' ? 'Refreshing Boba Drinks & More' 
+    : clientId === 'projectbrew' ? 'Innovation in Every Cup'
+    : 'Coffee and Pastries Made with Passion'
+
+  // Determine base path for navigation
+  const basePath = clientId ? `/${clientId}` : ''
+
   return (
     <footer className="footer">
       <div className="footer-container">
         <div className="footer-brand">
-          <Link to="/" className="footer-logo">
-            Hometown Brew
+          <Link to={basePath || "/"} className="footer-logo">
+            {businessName}
           </Link>
           <p className="footer-tagline">
-            Coffee and Pastries Made with Passion
+            {tagline}
           </p>
         </div>
 
@@ -30,7 +42,7 @@ function Footer() {
         </div>
 
         <div className="footer-bottom">
-          <p>&copy; {new Date().getFullYear()} Hometown Brew. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} {businessName}. All rights reserved.</p>
         </div>
       </div>
     </footer>
