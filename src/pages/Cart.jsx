@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useCart } from '../context/CartContext'
 import { useClient } from '../context/ClientContext'
 import './Cart.css'
@@ -12,6 +12,7 @@ function Cart() {
   const [showPaymentMode, setShowPaymentMode] = useState(false)
   const [showCashlessOptions, setShowCashlessOptions] = useState(false)
   const [showConfirm, setShowConfirm] = useState(false)
+  const [showCopied, setShowCopied] = useState(false)
   const [selectedOrderType, setSelectedOrderType] = useState('')
   const [customerName, setCustomerName] = useState('')
   const [selectedPaymentMode, setSelectedPaymentMode] = useState('')
@@ -90,25 +91,36 @@ function Cart() {
     setShowConfirm(true)
   }
 
-  const handleConfirmCheckout = () => {
+  const handleConfirmCheckout = async () => {
     const paymentDisplay = selectedPaymentMode === 'Cash' 
       ? 'Cash' 
       : `${selectedPaymentMode} (${selectedCashlessOption})`
     
     const orderText = generateOrderText(selectedOrderType, paymentDisplay, '')
-    const encodedMessage = encodeURIComponent(orderText)
     
     // Get the correct messenger link
     const messengerLink = getMessengerLink()
     
-    // Open Facebook Messenger with pre-filled message
+    // Detect mobile device
+    const isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent)
+    
+    try {
+      // Try to copy text to clipboard first (works on most mobile browsers)
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(orderText)
+        setShowCopied(true)
+        setTimeout(() => setShowCopied(false), 3000)
+      }
+    } catch (err) {
+      console.log('Clipboard not available, trying alternative method')
+    }
+    
+    // Build the messenger URL with text parameter
+    const encodedMessage = encodeURIComponent(orderText)
     const messengerUrl = `${messengerLink}?text=${encodedMessage}`
     
-    // Try to open messenger - use different approach for mobile
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
-    
     if (isMobile) {
-      // On mobile, try usingMessenger app directly
+      // On mobile, try using location.href which works better for deep links
       window.location.href = messengerUrl
     } else {
       // On desktop, use _blank
@@ -153,6 +165,13 @@ function Cart() {
 
   return (
     <div className="cart fade-in-fast">
+      {/* Copied to clipboard notification */}
+      {showCopied && (
+        <div className="copied-notification">
+          Order copied to clipboard! Paste it in Messenger.
+        </div>
+      )}
+
       {/* Order Type Selection Modal */}
       {showOrderType && (
         <div className="order-type-modal">
