@@ -69,8 +69,7 @@ function Cart() {
       orderText += `${index + 1}. ${item.name} x${item.quantity} - ₱${item.price * item.quantity}\n`
     })
     
-    orderText += `\nTotal: ₱${cartTotal}\n`
-    orderText += `\nThank you for ordering at ${clientName}!`
+    orderText += `\n\nThis is my order for ${clientName}. Please confirm.`
     return orderText
   }
 

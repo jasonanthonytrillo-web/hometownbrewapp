@@ -11,6 +11,8 @@ function Contact() {
   });
   const [status, setStatus] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
 
   // Get contact info from client config
   const contactInfo = client?.contact || {
@@ -66,25 +68,61 @@ function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const form = e.target;
-    const data = new FormData(form);
+
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      setStatus("Please fill in all fields before submitting.");
+      return;
+    }
+
+    // Format the message for Messenger
+    const messageText = `Name: ${formData.name}\nEmail: ${formData.email}\nMessage: ${formData.message}`;
 
     try {
-      const response = await fetch("https://formsubmit.co/tsccresurrection@gmail.com", {
-        method: "POST",
-        body: data,
-        headers: { Accept: "application/json" }
-      });
+      // Copy to clipboard
+      await navigator.clipboard.writeText(messageText);
 
-      if (response.ok) {
-        setStatus(`Thank you, ${formData.name}! Your message has been sent.`);
-        setFormData({ name: '', email: '', message: '' });
-      } else {
-        setStatus("Oops! There was a problem sending your message.");
-      }
-    } catch {
-      setStatus("Oops! There was a problem sending your message.");
+      // Show modal with the message
+      setModalMessage(messageText);
+      setShowModal(true);
+      setStatus("");
+    } catch (error) {
+      setStatus("Oops! There was a problem copying your message. Please try again.");
+      console.error('Error:', error);
     }
+  };
+
+  const handleModalConfirm = () => {
+    if (client?.messengerLink) {
+      // Encode the message for URL
+      const encodedMessage = encodeURIComponent(modalMessage);
+      
+      // Extract page ID from messenger link (format: https://www.messenger.com/t/336367819563080)
+      const pageIdMatch = client.messengerLink.match(/\/t\/(\d+)/);
+      const pageId = pageIdMatch ? pageIdMatch[1] : null;
+      
+      let messengerUrl = '';
+      if (pageId) {
+        // Use m.me short link format with ?text parameter (auto-pastes)
+        messengerUrl = `https://m.me/${pageId}?text=${encodedMessage}`;
+      } else {
+        // Try with username format
+        const usernameMatch = client.messengerLink.match(/\/t\/([^\/]+)/);
+        const username = usernameMatch ? usernameMatch[1] : null;
+        if (username) {
+          messengerUrl = `https://m.me/${username}?text=${encodedMessage}`;
+        } else {
+          messengerUrl = client.messengerLink;
+        }
+      }
+      
+      window.open(messengerUrl, '_blank');
+    }
+    setShowModal(false);
+    setFormData({ name: '', email: '', message: '' });
+  };
+
+  const handleModalCancel = () => {
+    setShowModal(false);
   };
 
   const storeHours = contactInfo.storeHours;
@@ -109,9 +147,6 @@ function Contact() {
               </div>
             )}
             <form onSubmit={handleSubmit} className="contact-form">
-              <input type="hidden" name="_subject" value={`New Contact Form Submission - ${client?.name || 'Business'}`} />
-              <input type="hidden" name="_captcha" value="false" />
-              
               <div className="form-group">
                 <label htmlFor="name">Name</label>
                 <input
@@ -279,6 +314,30 @@ function Contact() {
           </div>
         </div>
       </section>
+
+      {/* Custom Modal for Messenger */}
+      {showModal && (
+        <div className="modal-overlay">
+          <div className="modal-card">
+            <h3>Your Message is Ready!</h3>
+            <p className="modal-subtitle">Your message has been copied to clipboard:</p>
+            <div className="modal-message-box">
+              <pre>{modalMessage}</pre>
+            </div>
+            <p className="modal-instructions">
+              Press <strong>OK</strong> to open Messenger. Your message will be automatically pasted in the chat - just send it!
+            </p>
+            <div className="modal-buttons">
+              <button className="modal-ok-btn" onClick={handleModalConfirm}>
+                OK, Send on Messenger →
+              </button>
+              <button className="modal-cancel-btn" onClick={handleModalCancel}>
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
