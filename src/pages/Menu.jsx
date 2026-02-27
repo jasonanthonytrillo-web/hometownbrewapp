@@ -5,6 +5,7 @@ import './Menu.css'
 
 function Menu() {
   const [activeCategory, setActiveCategory] = useState('all')
+  const [searchTerm, setSearchTerm] = useState('')
   const { addToCart } = useCart()
   const { client } = useClient()
 
@@ -19,9 +20,12 @@ function Menu() {
 
   const products = client?.products || []
 
-  const filteredProducts = activeCategory === 'all' 
-    ? products 
-    : products.filter(product => product.category === activeCategory)
+  const filteredProducts = products.filter(product => {
+    const matchesCategory = activeCategory === 'all' || product.category === activeCategory
+    const matchesSearch = searchTerm === '' || 
+      product.name.toLowerCase().includes(searchTerm.toLowerCase())
+    return matchesCategory && matchesSearch
+  })
 
   const handleAddToCart = (product) => {
     addToCart({
@@ -44,6 +48,21 @@ function Menu() {
 
       <section className="menu-content">
         <div className="menu-container">
+          <div className="menu-search">
+            <input
+              type="text"
+              className="menu-search-input"
+              placeholder="Search products..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <span className="menu-search-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21 21L16.5 16.5M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </span>
+          </div>
+
           <div className="menu-tabs">
             {categories.map(category => (
               <button

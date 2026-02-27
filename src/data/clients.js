@@ -3,9 +3,11 @@ export const clients = {
   hometownbrew: {
     id: 'hometownbrew',
     name: 'Hometown Brew',
+    tagline: 'Coffee & Pastries',
     logo: '/hblogo.jpg',
     favicon: '/hblogo.jpg',
     banner: '/banner.jpg',
+    url: 'https://jat-7xjr.onrender.com/hometownbrew',
     theme: {
       primary: '#05300d',
       secondary: '#4aab20ac',
@@ -15,7 +17,8 @@ export const clients = {
     },
     categories: [
       { id: 'all', label: 'All' },
-      { id: 'coffee', label: 'Coffee' },
+      { id: 'hot-coffee', label: 'Hot Coffee' },
+      { id: 'iced-coffee', label: 'Iced Coffee' },
       { id: 'pastries', label: 'Pastries' },
       { id: 'dairy', label: 'Dairy Products' },
       { id: 'bestseller', label: 'Best Seller' }
@@ -26,7 +29,7 @@ export const clients = {
         name: 'Espresso',
         description: 'Rich and bold single shot espresso',
         price: 120,
-        category: 'coffee',
+        category: 'hot-coffee',
         image: 'https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?w=400&h=300&fit=crop'
       },
       {
@@ -34,7 +37,7 @@ export const clients = {
         name: 'Cappuccino',
         description: 'Perfect balance of espresso, steamed milk and foam',
         price: 150,
-        category: 'coffee',
+        category: 'hot-coffee',
         image: 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400&h=300&fit=crop'
       },
       {
@@ -42,7 +45,7 @@ export const clients = {
         name: 'Latte',
         description: 'Smooth and creamy espresso with steamed milk',
         price: 160,
-        category: 'coffee',
+        category: 'hot-coffee',
         image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&h=300&fit=crop'
       },
       {
@@ -50,7 +53,7 @@ export const clients = {
         name: 'Americano',
         description: 'Classic espresso with hot water for a milder taste',
         price: 130,
-        category: 'coffee',
+        category: 'hot-coffee',
         image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=400&h=300&fit=crop'
       },
       {
@@ -108,6 +111,14 @@ export const clients = {
         price: 150,
         category: 'bestseller',
         image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&h=300&fit=crop'
+      },
+      {
+        id: 12,
+        name: 'Seasalt',
+        description: 'Smooth and refreshing seasalt-flavored iced coffee',
+        price: 150,
+        category: 'iced-coffee',
+        image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&h=300&fit=crop'
       }
     ],
     contact: {
@@ -127,16 +138,29 @@ export const clients = {
         { day: 'Wednesday', hours: '10 AM–12 AM', isClosed: false }
       ]
     },
-    messengerLink: 'https://www.messenger.com/t/336367819563080'
+    messengerLink: 'https://www.messenger.com/t/336367819563080',
+    openGraph: {
+      title: 'Hometown Brew - Coffee & Pastries',
+      description: 'Hometown Brew – the best coffee and pastries in town!',
+      image: '/hblogo.jpg',
+      url: 'https://jat-7xjr.onrender.com/hometownbrew'
+    },
+    twitter: {
+      title: 'Hometown Brew - Coffee & Pastries',
+      description: 'Hometown Brew – the best coffee and pastries in town!',
+      image: '/hblogo.jpg'
+    }
   },
 
   // Example: Second client - Milk Tea Shop
   milkteashop: {
     id: 'milkteashop',
     name: 'Milk Tea Shop',
+    tagline: 'Premium Milk Tea & Fruit Tea',
     logo: '/milktea-logo.png',
     favicon: '/hblogo.jpg',
     banner: '/milktea-banner.jpg',
+    url: 'https://jat-7xjr.onrender.com/milkteashop',
     theme: {
       primary: '#2E7D32',
       secondary: '#81C784',
@@ -218,16 +242,29 @@ export const clients = {
         { day: 'Sunday', hours: '12 PM–9 PM', isClosed: false }
       ]
     },
-    messengerLink: 'https://www.messenger.com/t/123456789'
+    messengerLink: 'https://www.messenger.com/t/123456789',
+    openGraph: {
+      title: 'Milk Tea Shop - Premium Boba & Fruit Tea',
+      description: 'Milk Tea Shop – the best milk tea, fruit tea, and smoothies in town!',
+      image: '/milktea-logo.png',
+      url: 'https://jat-7xjr.onrender.com/milkteashop'
+    },
+    twitter: {
+      title: 'Milk Tea Shop - Premium Boba & Fruit Tea',
+      description: 'Milk Tea Shop – the best milk tea, fruit tea, and smoothies in town!',
+      image: '/milktea-logo.png'
+    }
   },
 
   // Example: Third client - Project Brew
   projectbrew: {
     id: 'projectbrew',
     name: 'Project Brew',
+    tagline: 'Artisan Coffee & Pastries',
     logo: '/pblogo.jpg',
     favicon: '/pblogo.jpg',
     banner: '/projectbrew-banner.jpg',
+    url: 'https://jat-7xjr.onrender.com/projectbrew',
     theme: {
       primary: '#533601',
       secondary: '#cf971d',
@@ -237,7 +274,8 @@ export const clients = {
     },
     categories: [
       { id: 'all', label: 'All' },
-      { id: 'coffee', label: 'Coffee' },
+      { id: 'hot-coffee', label: 'Hot Coffee' },
+      { id: 'iced-coffee', label: 'Iced Coffee' },
       { id: 'noncoffee', label: 'Non-Coffee' },
       { id: 'pastries', label: 'Pastries' }
     ],
@@ -247,7 +285,7 @@ export const clients = {
         name: 'Pour Over Coffee',
         description: 'Single origin pour over coffee',
         price: 180,
-        category: 'coffee',
+        category: 'hot-coffee',
         image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=300&fit=crop'
       },
       {
@@ -255,7 +293,7 @@ export const clients = {
         name: 'Cold Brew',
         description: 'Smooth cold brewed coffee',
         price: 160,
-        category: 'coffee',
+        category: 'iced-coffee',
         image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&h=300&fit=crop'
       },
       {
@@ -292,7 +330,18 @@ export const clients = {
         { day: 'Sunday', hours: '8 AM–8 PM', isClosed: false }
       ]
     },
-    messengerLink: 'https://www.messenger.com/t/117782470094668'
+    messengerLink: 'https://www.messenger.com/t/117782470094668',
+    openGraph: {
+      title: 'Project Brew - Artisan Coffee & Pastries',
+      description: 'Project Brew – premium artisan coffee and delicious pastries!',
+      image: '/pblogo.jpg',
+      url: 'https://jat-7xjr.onrender.com/projectbrew'
+    },
+    twitter: {
+      title: 'Project Brew - Artisan Coffee & Pastries',
+      description: 'Project Brew – premium artisan coffee and delicious pastries!',
+      image: '/pblogo.jpg'
+    }
   },
 
   // Simplify - POS Service Landing Page
@@ -303,6 +352,7 @@ export const clients = {
     logo: '/simplifylogo.png',
     favicon: '/simplifylogo.png',
     banner: '/simplify-banner.jpg',
+    url: 'https://jat-7xjr.onrender.com',
     theme: {
       primary: '#0028f1ca',
       secondary: '#1ea8d6',
@@ -350,6 +400,17 @@ export const clients = {
       '24/7 access from anywhere',
       'Simple setup process'
     ]
+  },
+  openGraph: {
+    title: 'Simplify POS - Point of Sale for Small Businesses',
+    description: 'Simplify POS – the best point of sale system for small businesses!',
+    image: '/simplifylogo.png',
+    url: 'https://jat-7xjr.onrender.com'
+  },
+  twitter: {
+    title: 'Simplify POS - Point of Sale for Small Businesses',
+    description: 'Simplify POS – the best point of sale system for small businesses!',
+    image: '/simplifylogo.png'
   }
 }
 
