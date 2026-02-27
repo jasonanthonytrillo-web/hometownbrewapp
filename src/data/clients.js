@@ -1,23 +1,10 @@
-/**
- * Client Configuration File
- * 
- * Add new clients here. Each client needs:
- * - id: Unique identifier (used in URL)
- * - name: Business name
- * - logo: Path to logo image (in public folder)
- * - banner: Path to banner image (optional)
- * - theme: Color configuration
- * - products: Array of products with categories
- * - contact: Contact information
- * - messengerLink: Facebook Messenger link for checkout
- */
-
 export const clients = {
   // Current client (Hometown Brew) - will be migrated
   hometownbrew: {
     id: 'hometownbrew',
     name: 'Hometown Brew',
     logo: '/hblogo.jpg',
+    favicon: '/hblogo.jpg',
     banner: '/banner.jpg',
     theme: {
       primary: '#05300d',
@@ -148,6 +135,7 @@ export const clients = {
     id: 'milkteashop',
     name: 'Milk Tea Shop',
     logo: '/milktea-logo.png',
+    favicon: '/hblogo.jpg',
     banner: '/milktea-banner.jpg',
     theme: {
       primary: '#2E7D32',
@@ -238,6 +226,7 @@ export const clients = {
     id: 'projectbrew',
     name: 'Project Brew',
     logo: '/pblogo.jpg',
+    favicon: '/pblogo.jpg',
     banner: '/projectbrew-banner.jpg',
     theme: {
       primary: '#533601',
@@ -312,6 +301,7 @@ export const clients = {
     name: 'Simplify',
     tagline: 'Your store. Your website. Your Messenger.',
     logo: '/simplifylogo.png',
+    favicon: '/simplifylogo.png',
     banner: '/simplify-banner.jpg',
     theme: {
       primary: '#0028f1ca',

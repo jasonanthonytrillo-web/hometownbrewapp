@@ -39,10 +39,16 @@ export const ClientProvider = ({ children }) => {
     return getClientById(urlClientId)
   }, [urlClientId])
 
-  // Update document title with client name (useEffect for side effects)
+  // Update document title and favicon with client-specific settings (useEffect for side effects)
   useEffect(() => {
     if (client) {
       document.title = client.name
+      
+      // Update favicon dynamically
+      const faviconLink = document.querySelector("link[rel='icon']")
+      if (faviconLink && client.favicon) {
+        faviconLink.href = client.favicon
+      }
     }
   }, [client])
 
