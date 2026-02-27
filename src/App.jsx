@@ -17,6 +17,38 @@ function AppContent() {
   const location = useLocation()
   const { client } = useClient()
 
+  // Update Open Graph and meta tags based on client
+  useEffect(() => {
+    if (client) {
+      // Update basic meta tags
+      document.title = client.openGraph?.title || client.name
+      
+      // Helper function to update or create meta tag
+      const updateMetaTag = (property, content, isProperty = true) => {
+        let tag = document.querySelector(`meta[${isProperty ? 'property' : 'name'}="${property}"]`)
+        if (!tag) {
+          tag = document.createElement('meta')
+          tag.setAttribute(isProperty ? 'property' : 'name', property)
+          document.head.appendChild(tag)
+        }
+        tag.content = content
+      }
+
+      // Open Graph meta tags
+      updateMetaTag('og:title', client.openGraph?.title || client.name)
+      updateMetaTag('og:description', client.openGraph?.description || client.tagline)
+      updateMetaTag('og:image', client.openGraph?.image || client.logo)
+      updateMetaTag('og:url', client.openGraph?.url || client.url)
+      updateMetaTag('og:type', 'website')
+
+      // Twitter meta tags
+      updateMetaTag('twitter:title', client.twitter?.title || client.name, false)
+      updateMetaTag('twitter:description', client.twitter?.description || client.tagline, false)
+      updateMetaTag('twitter:image', client.twitter?.image || client.logo, false)
+      updateMetaTag('twitter:card', 'summary_large_image', false)
+    }
+  }, [client])
+
   // Apply client theme colors as CSS variables
   useEffect(() => {
     if (client?.theme) {
