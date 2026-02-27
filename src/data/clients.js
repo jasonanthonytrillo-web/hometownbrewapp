@@ -162,7 +162,7 @@ export const clients = {
     name: 'Milk Tea Shop',
     tagline: 'Premium Milk Tea & Fruit Tea',
     logo: '/milktea-logo.png',
-    favicon: '/hblogo.jpg',
+    favicon: '/milktea-logo.png',
     banner: '/milktea-banner.jpg',
     url: 'https://jat-7xjr.onrender.com/milkteashop',
     theme: {

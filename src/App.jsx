@@ -54,6 +54,7 @@ function AppContent() {
         <meta name="twitter:title" content={client?.twitter?.title || client?.name || 'Simplify'} />
         <meta name="twitter:description" content={client?.twitter?.description || client?.tagline || ''} />
         <meta name="twitter:image" content={client?.twitter?.image} />
+        <link rel="icon" type="image/jpeg" href={client?.favicon} />
       </Helmet>
       <ScrollToTop />
       <div className="app">
