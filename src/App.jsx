@@ -37,7 +37,7 @@ function AppContent() {
       // Open Graph meta tags
       updateMetaTag('og:title', client.openGraph?.title || client.name)
       updateMetaTag('og:description', client.openGraph?.description || client.tagline)
-      updateMetaTag('og:image', client.openGraph?.image || client.logo)
+      updateMetaTag('og:image', client.openGraph?.image)
       updateMetaTag('og:url', client.openGraph?.url || client.url)
       updateMetaTag('og:type', 'website')
 

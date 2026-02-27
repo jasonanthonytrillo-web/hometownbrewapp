@@ -142,13 +142,13 @@ export const clients = {
     openGraph: {
       title: 'Hometown Brew - Coffee & Pastries',
       description: 'Hometown Brew – the best coffee and pastries in town!',
-      image: '/hblogo.jpg',
+      image: 'https://jat-7xjr.onrender.com/hblogo.jpg',
       url: 'https://jat-7xjr.onrender.com/#/hometownbrew'
     },
     twitter: {
       title: 'Hometown Brew - Coffee & Pastries',
       description: 'Hometown Brew – the best coffee and pastries in town!',
-      image: '/hblogo.jpg'
+      image: 'https://jat-7xjr.onrender.com/hblogo.jpg'
     },
     social: {
       facebook: 'https://www.facebook.com/hometownbrew24',
@@ -250,13 +250,13 @@ export const clients = {
     openGraph: {
       title: 'Milk Tea Shop - Premium Boba & Fruit Tea',
       description: 'Milk Tea Shop – the best milk tea, fruit tea, and smoothies in town!',
-      image: '/milktea-logo.png',
+      image: 'https://jat-7xjr.onrender.com/milktea-logo.png',
       url: 'https://jat-7xjr.onrender.com/#/milkteashop'
     },
     twitter: {
       title: 'Milk Tea Shop - Premium Boba & Fruit Tea',
       description: 'Milk Tea Shop – the best milk tea, fruit tea, and smoothies in town!',
-      image: '/milktea-logo.png'
+      image: 'https://jat-7xjr.onrender.com/milktea-logo.png'
     },
     social: {
       facebook: 'https://www.facebook.com/milkteashop',
@@ -342,13 +342,13 @@ export const clients = {
     openGraph: {
       title: 'Project Brew - Artisan Coffee & Pastries',
       description: 'Project Brew – premium artisan coffee and delicious pastries!',
-      image: '/pblogo.jpg',
+      image: 'https://jat-7xjr.onrender.com/pblogo.jpg',
       url: 'https://jat-7xjr.onrender.com/#/projectbrew'
     },
     twitter: {
       title: 'Project Brew - Artisan Coffee & Pastries',
       description: 'Project Brew – premium artisan coffee and delicious pastries!',
-      image: '/pblogo.jpg'
+      image: 'https://jat-7xjr.onrender.com/pblogo.jpg'
     },
     social: {
       facebook: 'https://www.facebook.com/ProjectBrewBXU',
@@ -415,13 +415,13 @@ export const clients = {
     openGraph: {
       title: 'Simplify POS - Point of Sale for Small Businesses',
       description: 'Simplify POS – the best point of sale system for small businesses!',
-      image: '/simplifylogo.png',
-      url: 'https://jat-7xjr.onrender/#/simplify.com'
+      image: 'https://jat-7xjr.onrender.com/simplifylogo.png',
+      url: 'https://jat-7xjr.onrender.com'
     },
     twitter: {
       title: 'Simplify POS - Point of Sale for Small Businesses',
       description: 'Simplify POS – the best point of sale system for small businesses!',
-      image: '/simplifylogo.png'
+      image: 'https://jat-7xjr.onrender.com/simplifylogo.png'
     },
     social: {
       facebook: 'https://www.facebook.com/jasonanthonytrillo',
