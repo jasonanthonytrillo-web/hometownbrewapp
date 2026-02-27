@@ -87,7 +87,7 @@ function Menu() {
         image: product.image,
         description: product.description
       })
-      showToastNotification(`${product.name} added to cart! ✓`)
+      showToastNotification(`${product.name} added to cart! ✓`, false)
     }
   }
 

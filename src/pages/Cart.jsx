@@ -54,6 +54,18 @@ function Cart() {
     }
   }, [showPaymentMode])
 
+  // Scroll to continue shopping button when cart is empty
+  useEffect(() => {
+    if (cartItems.length === 0) {
+      setTimeout(() => {
+        const continueBtn = document.querySelector('.continue-shopping-btn')
+        if (continueBtn) {
+          continueBtn.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        }
+      }, 100)
+    }
+  }, [cartItems])
+
   // Get client-specific base path for navigation
   const basePath = clientId ? `/${clientId}` : ''
 
@@ -192,6 +204,14 @@ function Cart() {
     setCustomerName('')
     setSelectedPaymentMode('')
     setSelectedCashlessOption('')
+    
+    // Scroll to Browse Menu button after checkout completion
+    setTimeout(() => {
+      const continueBtn = document.querySelector('.continue-shopping-btn')
+      if (continueBtn) {
+        continueBtn.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      }
+    }, 300)
   }
 
   const resetPaymentFlow = () => {

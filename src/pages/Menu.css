@@ -447,19 +447,21 @@
   position: fixed;
   top: 50%;
   left: 50%;
-  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+  transform: translate(-50%, -50%);
+  background: rgba(76, 175, 80, 0.85);
   color: white;
-  padding: 24px 40px;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(76, 175, 80, 0.4);
-  font-size: 1.2rem;
+  padding: 14px 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.25);
+  font-size: 0.95rem;
   font-weight: 600;
   display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
+  gap: 8px;
   z-index: 999;
+  white-space: nowrap;
   animation: zoomIn 0.4s ease-out, zoomOut 0.4s ease-out 2.1s forwards;
-
 }
 
 .toast-message {
