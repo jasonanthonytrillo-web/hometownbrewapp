@@ -7,10 +7,11 @@ const clientEventsContent = {
     events: [
       {
         id: 1,
-        title: 'Coffee Tasting Event',
+        title: 'Pop-up Cafe',
         date: 'Every Saturday',
         time: '2:00 PM - 4:00 PM',
         description: 'Join us for an exclusive coffee tasting experience where you can explore different origins and roasts. Our baristas will guide you through the flavor profiles of our finest selections.',
+        location: 'FSUU ROAD',
         image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&h=400&fit=crop',
         icon: '☕'
       },
@@ -104,6 +105,9 @@ function Events() {
                   <img src={event.image} alt={event.title} />
                   <div className="event-icon">{event.icon}</div>
                 </div>
+
+
+
                 
                 <div className="event-content">
                   <div className="event-date-time">
@@ -115,6 +119,11 @@ function Events() {
                       <span className="label">Time:</span>
                       <span className="value">{event.time}</span>
                     </div>
+                    {/* Location */}
+                    <div className="event-location">
+                       <span className="label">Location:</span>
+                       <span className="value">{event.location}</span>
+                        </div>
                   </div>
                   
                   <h3>{event.title}</h3>

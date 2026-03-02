@@ -118,12 +118,14 @@
   flex-direction: column;
 }
 
+
 /* Event Date/Time */
 .event-date-time {
   margin-bottom: 20px;
   padding-bottom: 20px;
   border-bottom: 2px solid var(--light-green);
 }
+
 
 .event-date-item {
   display: flex;
@@ -143,6 +145,27 @@
 }
 
 .event-date-item .value {
+  color: #666;
+  text-align: right;
+}
+
+/* Event Location (Label + Value like Date/Time) */
+.event-location {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+  padding-bottom: 10px;
+  
+}
+
+.event-location .label {
+  font-weight: 600;
+  color: var(--darkest-green);
+  min-width: 70px;
+}
+
+.event-location .value {
   color: #666;
   text-align: right;
 }
