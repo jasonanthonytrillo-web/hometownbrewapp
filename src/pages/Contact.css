@@ -64,15 +64,19 @@
 }
 
 .contact-form {
-  display: flex;
+  display: flex !important;
   flex-direction: column;
   gap: 1.5rem;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .form-group {
-  display: flex;
+  display: flex !important;
   flex-direction: column;
   gap: 0.5rem;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .form-group label {
@@ -89,6 +93,8 @@
   font-size: 1rem;
   transition: var(--transition);
   background-color: #fafafa;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .form-group input:focus,
@@ -122,6 +128,8 @@
   box-shadow: 0 4px 15px rgba(27, 67, 50, 0.3);
   text-transform: uppercase;
   letter-spacing: 1px;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .submit-btn:hover {

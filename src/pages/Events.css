@@ -155,7 +155,6 @@
   justify-content: space-between;
   margin-bottom: 10px;
   font-size: 0.95rem;
-  padding-bottom: 10px;
   
 }
 
@@ -472,24 +471,6 @@
 }
 
 .rsvp-form {
-  display: none;
-}
-
-.form-group {
-  display: none;
-}
-
-.form-group label {
-  display: none;
-}
-
-.form-group input,
-.form-group select {
-  display: none;
-}
-
-.form-group input:focus,
-.form-group select:focus {
   display: none;
 }
 
