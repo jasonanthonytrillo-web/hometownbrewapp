@@ -8,7 +8,7 @@ function Navbar() {
   const location = useLocation()
   const params = useParams()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const { cartItems } = useCart()
+  const { cartItems, cartAnimKey } = useCart()
   const { clientId, client: clientData } = useClient()
 
   const toggleMenu = () => {
@@ -60,7 +60,7 @@ function Navbar() {
                 <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
               </svg>
               {cartItemCount > 0 && (
-                <span className="cart-count">{cartItemCount}</span>
+                <span key={cartAnimKey} className="cart-count">{cartItemCount}</span>
               )}
             </Link>
           )}
@@ -139,7 +139,7 @@ function Navbar() {
                     <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
                   </svg>
                   {cartItemCount > 0 && (
-                    <span className="cart-count">{cartItemCount}</span>
+                    <span key={cartAnimKey} className="cart-count">{cartItemCount}</span>
                   )}
                 </Link>
               </li>

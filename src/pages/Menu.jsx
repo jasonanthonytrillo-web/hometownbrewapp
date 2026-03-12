@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useCart } from '../context/CartContext'
 import { useClient } from '../context/ClientContext'
 import './Menu.css'
@@ -11,6 +11,9 @@ function Menu() {
   const [selectedSize, setSelectedSize] = useState(null)
   const [toastMessage, setToastMessage] = useState('')
   const [showToast, setShowToast] = useState(false)
+  const [addingProductId, setAddingProductId] = useState(null)
+  const [addPhase, setAddPhase] = useState('idle') // idle | adding | added
+  const addStartRef = useRef(0)
   const { addToCart } = useCart()
   const { client } = useClient()
 
@@ -29,13 +32,18 @@ function Menu() {
   }, [selectedProduct])
 
   const showToastNotification = (message, shouldScroll = true) => {
+    console.log('🍞 showToastNotification CALLED:', message)
+    console.log('📱 showToast before:', showToast)
     setToastMessage(message)
     setShowToast(true)
-    // Scroll to top to show the toast notification (unless disabled)
+    console.log('📱 showToast AFTER setState:', true)
     if (shouldScroll) {
       window.scrollTo({ top: 0, behavior: 'smooth' })
     }
-    setTimeout(() => setShowToast(false), 2500)
+    setTimeout(() => {
+      console.log('🍞 Toast timeout - hiding')
+      setShowToast(false)
+    }, 5000) // Longer timeout for testing
   }
 
   // Get categories and products from client config, with fallbacks
@@ -73,17 +81,25 @@ function Menu() {
     setCurrentPage(1)
   }
 
-  const handleAddToCart = (product) => {
+  const handleAddToCart = async (product) => {
+    if (addingProductId === product.id) return // Prevent double-click
+
     // Check if product is available
     if (product.available === false) {
       showToastNotification(`${product.name} is currently not available`, false)
       return
     }
 
+    addStartRef.current = Date.now()
+    setAddingProductId(product.id)
+    setAddPhase('adding')
+    console.log('Add to cart clicked:', product.name)
+
     // If product has sizes, show size selection modal
     if (product.sizes && product.sizes.length > 0) {
       setSelectedProduct(product)
       setSelectedSize(null)
+      setTimeout(() => setAddingProductId(null), 500)
     } else {
       // If no sizes, add to cart directly
       addToCart({
@@ -93,13 +109,21 @@ function Menu() {
         image: product.image,
         description: product.description
       })
-      showToastNotification(`${product.name} added to cart! ✓`, false)
+console.log(`Added ${product.name} to cart ✓`)
+      setAddPhase('added')
+      console.log('Toast shown for', product.name)
+      setTimeout(() => {
+        setAddingProductId(null)
+        setAddPhase('idle')
+        addStartRef.current = 0
+      }, 2200)
     }
   }
 
-  const handleSizeSelect = (size) => {
+const handleSizeSelect = (size) => {
+    console.log('🔵 handleSizeSelect called with size:', size.label, 'product:', selectedProduct.name)
     if (selectedProduct) {
-      addToCart({
+      const productToAdd = {
         id: selectedProduct.id,
         name: selectedProduct.name,
         price: size.price,
@@ -107,8 +131,11 @@ function Menu() {
         description: selectedProduct.description,
         size: size.label,
         sizes: selectedProduct.sizes
-      })
-      showToastNotification(`${selectedProduct.name} added to cart! ✓`, false)
+      }
+      console.log('🛒 Calling addToCart with:', productToAdd)
+      addToCart(productToAdd)
+      console.log('✅ addToCart called, showing toast for:', selectedProduct.name)
+      console.log(`Successfully added ${selectedProduct.name} (${size.label}) to cart ✓`)
       setSelectedProduct(null)
       setSelectedSize(null)
     }
@@ -116,12 +143,7 @@ function Menu() {
 
   return (
     <div className="menu fade-in">
-      <section className="menu-hero">
-        <div className="menu-hero-content">
-          <h1 className="menu-title">Our Menu</h1>
-          <p className="menu-subtitle">Explore our handcrafted selections</p>
-        </div>
-      </section>
+
 
       <section className="menu-content">
         <div className="menu-container">
@@ -172,11 +194,24 @@ function Menu() {
                       }
                     </span>
                     <button 
-                      className="menu-card-button"
+                      className={`menu-card-button ${addingProductId === product.id ? 'adding' : ''}`}
                       onClick={() => handleAddToCart(product)}
-                      disabled={product.available === false}
+                      disabled={product.available === false || addingProductId === product.id}
                     >
-                      {product.available === false ? 'Not Available' : 'Add to Cart'}
+                      {addingProductId === product.id ? (
+                        <>
+                          {addPhase === 'adding' ? (
+                            <>
+                              Adding...
+                              <span className="spinner"></span>
+                            </>
+                          ) : addPhase === 'added' ? (
+                            'Added ✓'
+                          ) : (
+                            'Add to Cart'
+                          )}
+                        </>
+                      ) : product.available === false ? 'Not Available' : 'Add to Cart'}
                     </button>
                   </div>
                 </div>
@@ -235,8 +270,8 @@ function Menu() {
           )}
 
           {/* Toast Notification */}
-          {showToast && (
-            <div className="toast-notification">
+{showToast && (
+            <div key="toast-unique" className="toast-notification">
               <span className="toast-message">{toastMessage}</span>
             </div>
           )}

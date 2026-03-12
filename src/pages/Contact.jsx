@@ -131,12 +131,7 @@ function Contact() {
 
   return (
     <div className="contact fade-in">
-      <section className="contact-hero">
-        <div className="contact-hero-content">
-          <h1 className="contact-title">Contact Us</h1>
-          <p className="contact-subtitle">We'd love to hear from you</p>
-        </div>
-      </section>
+
 
       <section className="contact-content">
         <div className="contact-container">

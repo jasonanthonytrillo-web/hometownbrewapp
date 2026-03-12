@@ -94,10 +94,11 @@ function Cart() {
     return null
   }
 
-  const generateOrderId = () => {
-    const timestamp = Date.now().toString().slice(-6)
-    const random = Math.random().toString(36).substring(2, 5).toUpperCase()
-    return `HB-${timestamp}-${random}`
+const generateOrderId = () => {
+    // Generate random 6-digit number (includes numbers prominently, still random)
+    const min = 100000;
+    const max = 999999;
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
   const generateOrderText = (orderType, paymentMode, cashlessOption) => {
@@ -196,7 +197,7 @@ function Cart() {
       // Desktop - open in new tab
       window.open(messengerUrl, '_blank')
     }
-  
+
     // Clear cart after checkout
     clearCart()
     setShowConfirm(false)
@@ -402,12 +403,14 @@ function Cart() {
       )}
 
       {/* Confirmation Modal */}
-      {showConfirm && (
+{showConfirm && (
         <div className="order-type-modal">
           <div className="order-type-content confirm-modal">
-            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
-            </svg>
+            <div className="confirm-icon-circle">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M22 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+              </svg>
+            </div>
             <h2>Proceed to Messenger?</h2>
             <p>Your order will open in Messenger. Just click Send to complete your order!</p>
             <div className="confirm-buttons">

@@ -82,13 +82,7 @@ function Events() {
 
   return (
     <div className="events">
-      {/* Hero Section */}
-      <section className="events-hero">
-        <div className="events-hero-content fade-in">
-          <h1>Events & Activities</h1>
-          <p>Join us for exciting experiences and community moments</p>
-        </div>
-      </section>
+
 
       {/* Events Section */}
       <section className="events-content">

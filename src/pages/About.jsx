@@ -40,13 +40,7 @@ function About() {
 
   return (
     <div className="about">
-      {/* Hero Section */}
-      <section className="about-hero">
-        <div className="about-hero-content fade-in">
-          <h1>About Us</h1>
-          <p>Discover our story and passion for quality</p>
-        </div>
-      </section>
+
 
       {/* Content Section */}
       <section className="about-content">
