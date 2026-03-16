@@ -12,7 +12,7 @@ import Cart from './pages/Cart'
 import Events from './pages/Events'
 import { CartProvider } from './context/CartContext'
 import { ClientProvider, useClient } from './context/ClientContext'
-import { getClientIds, defaultClientId } from './data/clients'
+import { hometownbrew } from './data/hometownbrew'
 
 // Inner component that uses client context
 function AppContent() {
@@ -38,22 +38,19 @@ function AppContent() {
     }
   }, [client])
 
-  // Get all client IDs for routing
-  const clientIds = getClientIds()
-
   return (
     <>
       <Helmet>
-        <title>{client?.openGraph?.title || client?.name || 'Simplify'}</title>
-        <meta name="description" content={client?.openGraph?.description || client?.tagline || ''} />
-        <meta property="og:title" content={client?.openGraph?.title || client?.name || 'Simplify'} />
-        <meta property="og:description" content={client?.openGraph?.description || client?.tagline || ''} />
+        <title>{client?.openGraph?.title || client?.name || 'Hometown Brew'}</title>
+        <meta name="description" content={client?.openGraph?.description || client?.tagline || 'Coffee & Pastries'} />
+        <meta property="og:title" content={client?.openGraph?.title || client?.name || 'Hometown Brew'} />
+        <meta property="og:description" content={client?.openGraph?.description || client?.tagline || 'Coffee & Pastries'} />
         <meta property="og:image" content={client?.openGraph?.image} />
         <meta property="og:url" content={client?.openGraph?.url || client?.url || 'https://jat-7xjr.onrender.com'} />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={client?.twitter?.title || client?.name || 'Simplify'} />
-        <meta name="twitter:description" content={client?.twitter?.description || client?.tagline || ''} />
+        <meta name="twitter:title" content={client?.twitter?.title || client?.name || 'Hometown Brew'} />
+        <meta name="twitter:description" content={client?.twitter?.description || client?.tagline || 'Coffee & Pastries'} />
         <meta name="twitter:image" content={client?.twitter?.image} />
         <link rel="icon" type="image/jpeg" href={client?.favicon} />
       </Helmet>
@@ -62,35 +59,15 @@ function AppContent() {
         <Navbar />
         <main className="main-content">
           <Routes>
-            {/* Root route redirects to default client */}
+            {/* Single client routes at root level */}
             <Route path="/" element={<Home />} />
-            
-            {/* Client-specific routes */}
-            {clientIds.map(clientId => (
-              <Route key={clientId} path={`/${clientId}`} element={<Home />} />
-            ))}
-            {clientIds.map(clientId => (
-              <Route key={`${clientId}-about`} path={`/${clientId}/about`} element={<About />} />
-            ))}
-            {clientIds.map(clientId => (
-              <Route key={`${clientId}-contact`} path={`/${clientId}/contact`} element={<Contact />} />
-            ))}
-            {clientIds.map(clientId => (
-              <Route key={`${clientId}-menu`} path={`/${clientId}/menu`} element={<Menu />} />
-            ))}
-            {clientIds.map(clientId => (
-              <Route key={`${clientId}-cart`} path={`/${clientId}/cart`} element={<Cart />} />
-            ))}
-            {clientIds.map(clientId => (
-              <Route key={`${clientId}-events`} path={`/${clientId}/events`} element={<Events />} />
-            ))}
-            
-            {/* Legacy routes (redirect to default client) */}
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/menu" element={<Menu />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/events" element={<Events />} />
+            {/* Catch-all redirect to home */}
+            <Route path="*" element={<Home />} />
           </Routes>
         </main>
         <Footer />
@@ -110,3 +87,4 @@ function App() {
 }
 
 export default App
+

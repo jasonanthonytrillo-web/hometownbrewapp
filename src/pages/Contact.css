@@ -2,31 +2,8 @@
   min-height: 100vh;
 }
 
-/* Contact Hero Section */
-.contact-hero {
-  background: linear-gradient(
-    135deg,
-    var(--primary-dark-green) 0%,
-    var(--darkest-green) 100%
-  );
-  padding: 60px 5%;
-  text-align: center;
-}
-
-.contact-hero-content h1 {
-  font-size: 3rem;
-  font-weight: 700;
-  color: var(--white);
-  margin-bottom: 0.5rem;
-}
-
-.contact-hero-content p {
-  font-size: 1.25rem;
-  font-weight: 300;
-  color: var(--light-green);
-}
-
 /* Contact Content Section */
+
 .contact-content {
   padding: 80px 5%;
   background-color: var(--white);
@@ -64,19 +41,15 @@
 }
 
 .contact-form {
-  display: flex !important;
+  display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  visibility: visible !important;
-  opacity: 1 !important;
 }
 
 .form-group {
-  display: flex !important;
+  display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  visibility: visible !important;
-  opacity: 1 !important;
 }
 
 .form-group label {
@@ -93,8 +66,6 @@
   font-size: 1rem;
   transition: var(--transition);
   background-color: #fafafa;
-  visibility: visible !important;
-  opacity: 1 !important;
 }
 
 .form-group input:focus,
@@ -116,7 +87,7 @@
 /* Submit Button - Improved Design */
 .submit-btn {
   padding: 1rem 2.5rem;
-  background: linear-gradient(135deg, var(--primary-dark-green) 0%, var(--light-green) 100%);
+  background: linear-gradient(135deg, var(--primary-dark-green) 0%, #074127 100%);
   color: var(--white);
   font-size: 1rem;
   font-weight: 600;
@@ -128,12 +99,10 @@
   box-shadow: 0 4px 15px rgba(27, 67, 50, 0.3);
   text-transform: uppercase;
   letter-spacing: 1px;
-  visibility: visible !important;
-  opacity: 1 !important;
 }
 
 .submit-btn:hover {
-  background: linear-gradient(135deg, var(--light-green) 0%, var(--primary-dark-green) 100%);
+  background: linear-gradient(135deg, #2d6a4f 0%, var(--primary-dark-green) 100%);
   transform: translateY(-3px);
   box-shadow: 0 8px 25px rgba(45, 106, 79, 0.4);
 }
@@ -393,21 +362,10 @@
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
-  .contact-hero {
-    padding: 40px 5%;
-  }
-
-  .contact-hero-content h1 {
-    font-size: 2rem;
-  }
-
-  .contact-hero-content p {
-    font-size: 1rem;
-  }
-
   .contact-content {
     padding: 50px 5%;
   }
+
 
   .contact-form-wrapper {
     padding: 1.5rem;
@@ -670,7 +628,7 @@
 }
 
 .modal-ok-btn {
-  background: linear-gradient(135deg, var(--light-green) 0%, var(--primary-dark-green) 100%);
+  background: linear-gradient(135deg, #2d6a4f 0%, var(--primary-dark-green) 100%);
   color: var(--white);
   padding: 0.75rem 1.5rem;
   border: none;

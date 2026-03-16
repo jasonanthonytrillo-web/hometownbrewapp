@@ -110,11 +110,10 @@ const clientHeroContent = {
 function Home() {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isOpen, setIsOpen] = useState(false)
-  const { client } = useClient()
-  const { clientId } = useClient()
+const { client } = useClient()
   
-  // Check if this is the Simplify POS landing page
-  const isSimplify = clientId === 'simplify'
+  // Single client - no Simplify landing
+  const isSimplify = false
   
   // Get store hours from client config
   const storeHours = client?.contact?.storeHours || [
@@ -153,7 +152,7 @@ function Home() {
   }, [])
   
   // Get client-specific content or use defaults
-  const clientContent = clientHeroContent[clientId] || {
+  const clientContent = clientHeroContent['hometownbrew'] || {
     images: defaultHeroImages,
     title: clientId ? clientId.charAt(0).toUpperCase() + clientId.slice(1) : 'Welcome',
     subtitle: 'Discover our delicious menu',
@@ -169,8 +168,8 @@ function Home() {
     return () => clearInterval(slideInterval)
   }, [heroImages.length])
 
-  // Determine base path for navigation
-  const basePath = clientId ? `/${clientId}` : ''
+// Single client - root paths
+  const basePath = ''
 
   // Render Simplify Cafe Kiosk Landing Page
   if (isSimplify && client) {
@@ -392,7 +391,7 @@ function Home() {
         <div className="hero-content fade-in">
           <h1 className="hero-title">{clientContent.title}</h1>
           <p className="hero-subtitle">{clientContent.subtitle}</p>
-          <Link to={`${basePath}/menu`} className="btn btn-primary hero-btn">
+<Link to="/menu" className="btn btn-primary hero-btn">
             Order Now
           </Link>
         </div>

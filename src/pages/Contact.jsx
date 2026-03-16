@@ -15,7 +15,7 @@ function Contact() {
   const [modalMessage, setModalMessage] = useState("");
 
   // Get contact info from client config
-  const defaultContactInfo = {
+  const contactInfo = client?.contact || {
     phone: '(+63) 912-345-6789',
     email: 'info@business.com',
     address: 'Business Address',
@@ -32,8 +32,6 @@ function Contact() {
       { day: 'Sunday', hours: 'Closed', isClosed: true }
     ]
   };
-
-  const contactInfo = client?.contact ? { ...defaultContactInfo, ...client.contact } : defaultContactInfo;
 
   useEffect(() => {
     const checkOpenStatus = () => {

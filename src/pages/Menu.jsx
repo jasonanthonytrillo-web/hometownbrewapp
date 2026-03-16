@@ -15,7 +15,8 @@ function Menu() {
   const [addPhase, setAddPhase] = useState('idle') // idle | adding | added
   const addStartRef = useRef(0)
   const { addToCart } = useCart()
-  const { client } = useClient()
+const { client } = useClient()
+
 
   const PRODUCTS_PER_PAGE = 15
 

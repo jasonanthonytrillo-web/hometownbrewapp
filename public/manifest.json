@@ -1,0 +1,17 @@
+{
+  "name": "Hometown Brew",
+  "short_name": "Hometown Brew",
+  "description": "Coffee shop in the heart of the city. Complete website + online kiosk for cafes.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#1B4332",
+  "icons": [
+    {
+      "src": "/hblogo.jpg",
+      "sizes": "192x192 512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ]
+}

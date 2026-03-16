@@ -1,5 +1,5 @@
 export const clients = {
-  // Current client (Hometown Brew) - will be migrated
+  // Hometown Brew config (kept for reference, main config now in hometownbrew.js)
   hometownbrew: {
     id: 'hometownbrew',
     name: 'Hometown Brew',
@@ -1645,9 +1645,7 @@ export const clients = {
  * @param {string} clientId - The client identifier from URL
  * @returns {object|undefined} Client configuration object
  */
-export const getClientById = (clientId) => {
-  return clients[clientId]
-}
+// getClientById removed - single client app
 
 /**
  * Get all client IDs for routing

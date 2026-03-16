@@ -2,11 +2,14 @@ import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { useCart } from '../context/CartContext'
 import { useClient } from '../context/ClientContext'
+import { hometownbrew } from '../data/hometownbrew'
 import './Cart.css'
+
 
 function Cart() {
   const { cartItems, removeFromCart, updateQuantity, updateSize, clearCart, cartTotal } = useCart()
-  const { client, clientId } = useClient()
+  const { client } = useClient()
+
   const [showOrderType, setShowOrderType] = useState(false)
   const [showNameInput, setShowNameInput] = useState(false)
   const [showPaymentMode, setShowPaymentMode] = useState(false)
@@ -67,7 +70,7 @@ function Cart() {
   }, [cartItems])
 
   // Get client-specific base path for navigation
-  const basePath = clientId ? `/${clientId}` : ''
+  const basePath = ''
 
   // Get client-specific messenger link - with fallback
   const getMessengerLink = () => {
