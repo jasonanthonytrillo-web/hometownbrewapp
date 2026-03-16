@@ -8,7 +8,7 @@ import { HelmetProvider } from 'react-helmet-async'
 // Register service worker for PWA functionality
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/src/sw.js')
+    navigator.serviceWorker.register('/sw.js')
       .then((registration) => {
         console.log('SW registered successfully:', registration.scope);
       })

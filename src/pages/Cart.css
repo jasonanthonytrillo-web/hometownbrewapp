@@ -452,7 +452,7 @@
 }
 
 .name-input::placeholder {
-  color: #999;
+  color: var(--primary-dark-green);
 }
 
 /* Copied to clipboard notification */
