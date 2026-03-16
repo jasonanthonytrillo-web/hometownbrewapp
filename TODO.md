@@ -2,13 +2,11 @@
 
 ## Status: In Progress
 
-### Step 1: [✓] Create TODO.md (Done)
-### Step 2: Update public/_redirects file
-- Clean up formatting to ensure proper SPA catch-all redirect for Render
-### Step 3: Test and deploy
-- Commit/push to trigger Render redeploy
-- Test https://hometownbrew.onrender.com/menu directly
-### Step 4: Verify all routes
-- Test /cart, /about, /events, etc.
-### Step 5: [ ] Mark complete
+### Steps from approved plan:
+- [✓] Step 1: Update public/_redirects with clean SPA rewrite for Render
+- [ ] Step 2: Commit and manual deploy on Render dashboard
+- [ ] Step 3: Test https://hometownbrew.onrender.com/menu loads Menu page
+- [ ] Step 4: Test other routes (/cart, /about, /hometownbrew/menu etc.)
+- [ ] Step 5: Mark complete in TODO.md
 
+**Note**: Auto-deploy disabled (manual only per user).
