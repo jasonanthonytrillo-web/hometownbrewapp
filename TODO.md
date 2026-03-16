@@ -1,10 +1,10 @@
-# Task: Add "No products found." message for empty search results in Menu page ✅
+# Task: Enable Open Graph image preview for FB/Messenger link sharing on https://cravecornerhub.onrender.com
 
-## Steps:
-1. [x] Create this TODO.md
-2. [x] Edit src/pages/Menu.jsx: Replace menu-grid div with conditional rendering (show message if filteredProducts.length === 0, else grid + pagination)
-3. [x] Edit src/pages/Menu.css: Add styling for .no-products-message
-4. [x] Test: Changes implemented correctly. Search "xyz" now shows "No products found." message in centered styling. Normal searches/products display as before.
-5. [x] Update TODO.md with completion
-6. [x] Attempt completion
+## Steps to complete:
+- [ ] Step 1: Add static Open Graph meta tags to index.html for root domain fallback preview
+- [ ] Step 2: Update default client ('simplify') openGraph.image URL in src/data/clients.js to use correct domain 'https://cravecornerhub.onrender.com/wallpaper.jpg'
+- [ ] Step 3: Test locally with npm run dev and FB Sharing Debugger
+- [ ] Step 4: Build and deploy (git push, Render auto-deploys)
+
+✅ Steps 1 & 2 completed: Static OG tags in index.html and simplify client openGraph updated with https://cravecornerhub.onrender.com/wallpaper.jpg
 

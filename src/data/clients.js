@@ -561,13 +561,13 @@ export const clients = {
     openGraph: {
       title: 'Simplify POS - Point of Sale for Small Businesses',
       description: 'Simplify POS – the best point of sale system for small businesses!',
-      image: 'https://jat-7xjr.onrender.com/simplifylogo.png',
-      url: 'https://jat-7xjr.onrender.com'
+      image: 'https://cravecornerhub.onrender.com/wallpaper.jpg',
+      url: 'https://cravecornerhub.onrender.com'
     },
     twitter: {
       title: 'Simplify POS - Point of Sale for Small Businesses',
       description: 'Simplify POS – the best point of sale system for small businesses!',
-      image: 'https://jat-7xjr.onrender.com/simplifylogo.png'
+      image: 'https://cravecornerhub.onrender.com/wallpaper.jpg'
     },
     social: {
       facebook: 'https://www.facebook.com/jasonanthonytrillo',
