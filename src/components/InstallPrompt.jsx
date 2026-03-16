@@ -53,8 +53,8 @@ function InstallPrompt() {
   return (
     <>
       {/* Floating Suggestion Pill */}
-      <div className="install-prompt-pill" role="button" tabIndex={0} onClick={handleInstallClick}>
-        📱 Download {clientName}
+      <div className={`install-prompt-pill ${showPrompt ? 'show' : ''}`} role="button" tabIndex={0} onClick={handleInstallClick}>
+        📱 Download Our App Now
         <button className="pill-close" onClick={(e) => {
           e.stopPropagation();
           handleDismiss();
@@ -65,7 +65,7 @@ function InstallPrompt() {
       {showInstallModal && (
         <div className="install-modal-overlay">
           <div className="install-modal">
-            <h3>Install {clientName}?</h3>
+            <h3>Install Our App?</h3>
             <p>Add to home screen for offline access & quick ordering!</p>
             <div className="modal-buttons">
               <button className="install-confirm-btn" onClick={handleInstallClick}>

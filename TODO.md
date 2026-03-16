@@ -1,11 +1,13 @@
-# Navbar Mobile Spacing Fix ✅
+# TODO: Fix Install Prompt Popup Visibility
 
-## Steps:
-- [x] 1. Edit src/components/Navbar.css: Update .mobile-controls gap in both mobile media queries (0.75rem @768px, 0.5rem @480px)
-- [x] 2. Verify changes in browser dev tools (mobile viewports: 768px and 480px) - Gaps increased, cart and hamburger now properly separated
-- [x] 3. Update this TODO with results and mark complete
+✅ Step 1: Create TODO.md with plan breakdown  
+✅ Step 2: Edit src/components/InstallPrompt.jsx (add 'show' class + update text to "Download Our App Now")  
 
-Current status: Complete. Mobile navbar cart and hamburger icons now have adequate spacing (12px on tablets, 8px on phones).
+## Remaining Steps
+- Step 3: Test popup visibility  
+  Run `npm run dev`, wait 3s, verify popup appears bottom-right, clickable  
+  Clear storage if needed: `localStorage.removeItem('installPromptDismissed')`  
+- Step 4: attempt_completion
 
-Test by resizing browser to <768px width.
+**Progress: 2/4 steps complete**
 
