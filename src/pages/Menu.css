@@ -491,12 +491,14 @@ evd.menu {
   transition: all 0.3s ease;
   font-size: 1rem;
   font-weight: 600;
+  color: var(--primary-dark-green);
 }
 
 .size-option-btn:hover {
   background: linear-gradient(135deg, var(--light-green) 0%, var(--primary-dark-green) 100%);
   color: var(--white);
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(45, 106, 79, 0.3);
 }
 
 .size-label {
@@ -507,6 +509,7 @@ evd.menu {
 .size-price {
   font-weight: 700;
   font-size: 1.1rem;
+  color: inherit;
 }
 
 .size-cancel-btn {
@@ -523,7 +526,11 @@ evd.menu {
 }
 
 .size-cancel-btn:hover {
-  background-color: #e8e8e8;
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: var(--white);
+  border-color: #dc2626;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+  transform: translateY(-1px);
 }
 
 /* Toast Notification */
