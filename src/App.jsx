@@ -12,6 +12,7 @@ import Cart from './pages/Cart'
 import Events from './pages/Events'
 import { CartProvider } from './context/CartContext'
 import { ClientProvider, useClient } from './context/ClientContext'
+import InstallPrompt from './components/InstallPrompt'
 import { hometownbrew } from './data/hometownbrew'
 
 // Inner component that uses client context
@@ -71,6 +72,7 @@ function AppContent() {
           </Routes>
         </main>
         <Footer />
+        <InstallPrompt />
       </div>
     </>
   )

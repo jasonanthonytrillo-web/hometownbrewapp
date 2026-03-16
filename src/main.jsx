@@ -16,6 +16,19 @@ if ('serviceWorker' in navigator) {
         console.log('SW registration failed:', error);
       });
   });
+
+  // Global PWA install prompt
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    window.deferredPrompt = e;
+    console.log('PWA install prompt ready');
+  });
+
+  window.addEventListener('appinstalled', () => {
+    window.deferredPrompt = null;
+    localStorage.setItem('installPromptDismissed', 'true');
+    console.log('PWA installed');
+  });
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(

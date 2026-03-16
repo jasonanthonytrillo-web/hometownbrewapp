@@ -143,6 +143,23 @@ const { client: clientData } = useClient()
                   )}
                 </Link>
               </li>
+              <li>
+                <Link 
+                  to="/#" 
+                  className="nav-link install-link"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    closeMenu();
+                    if (window.deferredPrompt) {
+                      window.deferredPrompt.prompt();
+                    } else {
+                      alert('Open in Chrome mobile and add to home screen for app-like experience!');
+                    }
+                  }}
+                >
+                  📱 Download App
+                </Link>
+              </li>
             </>
           )}
         </ul>
